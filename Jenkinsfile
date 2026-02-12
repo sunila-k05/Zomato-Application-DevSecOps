@@ -23,11 +23,18 @@ stage('Install Dependencies') {
 }
 
 
-stage('SonarQube Analysis') {
+stage('SonarCloud Analysis') {
+    environment {
+        SONAR_TOKEN = credentials('sonarcloud-token')
+    }
     steps {
-        withSonarQubeEnv('sonarqube-server') {
-            sh 'sonar-scanner'
-        }
+        sh """
+        sonar-scanner \
+          -Dsonar.projectKey=sunila-k05_Zomato-Application-Secure-Deployment-with-Dev-Sec-Ops-CI-CD \
+          -Dsonar.organization=sunila-k05 \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN
+        """
     }
 }
 
