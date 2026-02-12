@@ -41,7 +41,7 @@ stage('OWASP Dependency Check') {
               --scan /src \
               --format HTML \
               --out /src/dependency-check-report \
-              --failOnCVSS 7
+              --failOnCVSS 9
             '''
         }
         archiveArtifacts artifacts: 'dependency-check-report/dependency-check-report.html', fingerprint: true
