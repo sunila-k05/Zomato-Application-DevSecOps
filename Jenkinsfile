@@ -15,5 +15,23 @@ pipeline {
                 sh 'ls -la'
             }
         }
+stage('Install Dependencies') {
+    steps {
+        echo "Installing dependencies..."
+        sh 'npm install'
     }
+}
+
+
+stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonarqube-server') {
+            sh 'sonar-scanner'
+        }
+    }
+}
+
+
+
+ }
 }
