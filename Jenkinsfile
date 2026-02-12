@@ -22,6 +22,28 @@ stage('Install Dependencies') {
     }
 }
 
+stage('OWASP Dependency Check') {
+    steps {
+        script {
+            sh '''
+            docker run --rm \
+              -v $(pwd):/src \
+              -v dependency-check-data:/usr/share/dependency-check/data \
+              owasp/dependency-check:latest \
+              --project "Zomato-App" \
+              --scan /src \
+              --format HTML \
+              --out /src/dependency-check-report \
+              --failOnCVSS 7
+            '''
+        }
+
+        archiveArtifacts artifacts: 'dependency-check-report/dependency-check-report.html', fingerprint: true
+    }
+}
+
+
+
 stage('SonarCloud Analysis') {
     environment {
         SONAR_TOKEN = credentials('sonarcloud-token')
