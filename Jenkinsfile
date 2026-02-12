@@ -22,6 +22,7 @@ stage('Install Dependencies') {
         script {
             sh '''
             docker run --rm \
+              -u 1000:1000 \
               -v /var/lib/docker/volumes/jenkins_home/_data/workspace/DevSecOps-Pipeline:/app \
               -w /app \
               node:18 \
