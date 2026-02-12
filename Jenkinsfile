@@ -17,8 +17,15 @@ pipeline {
         }
 stage('Install Dependencies') {
     steps {
-        echo "Installing dependencies..."
-        sh 'npm install'
+        script {
+            sh '''
+            docker run --rm \
+              -v "$PWD":/app \
+              -w /app \
+              node:18 \
+              npm install
+            '''
+        }
     }
 }
 
