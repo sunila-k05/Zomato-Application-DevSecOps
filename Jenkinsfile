@@ -74,14 +74,12 @@ stage('SonarCloud Analysis') {
 }
 
 
-stage ('Build Docker Image') {
-   steps {
-    sh '''
-     docker build -t sunilak05/zomato-app:latest .
-     ...
-
-}
-
+stage('Build Docker Image') {
+    steps {
+        sh '''
+        docker build -t sunila-k05/zomato-app:latest .
+        '''
+    }
 }
 
 
