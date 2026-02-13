@@ -77,12 +77,44 @@ stage('SonarCloud Analysis') {
 stage('Build Docker Image') {
     steps {
         sh '''
-        docker build -t sunila-k05/zomato-app:latest .
+        docker build -t sunilak05/zomato-app:latest .
+        '''
+    }
+}
+stage('Trivy FS Scan') {
+    steps {
+        sh '''
+        docker run --rm -v $PWD:/app aquasec/trivy fs /app
         '''
     }
 }
 
 
+
+stage('Push to Docker Hub') {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'docker-credentials',
+                         usernameVariable: 'DOCKER_USER',
+                         passwordVariable: 'DOCKER_PASS')]) {
+            sh '''
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push sunilak05/zomato-app:latest
+            '''
+        }
+    }
+}
+
+
+stage('Deploy Container') {
+    steps {
+        sh '''
+        docker stop zomato-app || true
+        docker rm zomato-app || true
+        docker run -d -p 3000:3000 --name zomato-app \
+        sunila-k05/zomato-app:latest
+        '''
+    }
+}
 
  }
 }
