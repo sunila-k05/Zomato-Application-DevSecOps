@@ -81,12 +81,24 @@ stage('Build Docker Image') {
         '''
     }
 }
+
+        stage('Trivy Image Scan') {
+    steps {
+        sh '''
+        docker run --rm \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        aquasec/trivy image sunilak05/zomato-app:latest
+        '''
+    }
+}
+
+        
 stage('Trivy FS Scan') {
     steps {
         sh '''
         docker run --rm -v $PWD:/app aquasec/trivy fs /app
         '''
-    }
+    }    
 }
 
 
