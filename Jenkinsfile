@@ -111,7 +111,7 @@ stage('Deploy Container') {
         docker stop zomato-app || true
         docker rm zomato-app || true
         docker run -d -p 3000:3000 --name zomato-app \
-        sunila-k05/zomato-app:latest
+        sunilak05/zomato-app:latest
         '''
     }
 }
