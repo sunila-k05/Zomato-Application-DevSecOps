@@ -18,7 +18,7 @@ The goal of this project is to implement a **secure, automated, production-level
 
 ---
 
-# 🏗 Architecture Workflow
+#  Architecture Workflow
 
 1. Developer pushes code to GitHub
 2. Jenkins triggers pipeline automatically
