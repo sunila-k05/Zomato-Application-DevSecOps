@@ -1,8 +1,5 @@
-**A full-stack Zomato Clone with DevSecOps integration for a secure and scalable deployment.**
- ![Zomato Clone](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*X_hm5iF0NRjbOZHB6RQIFA.jpeg)  
-
 #  Zomato Application – DevSecOps CI/CD Pipeline
-
+ ![Zomato Clone](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*X_hm5iF0NRjbOZHB6RQIFA.jpeg)  
 ##  Project Overview
 
 This project demonstrates a complete **Production-Style DevSecOps CI/CD Pipeline** for a React-based Zomato clone application.
